@@ -13,6 +13,12 @@ build :: () {
 }
 
 DECLARATIONS_TO_OMIT :: string.[
+    "llhttp__internal_t",
+    "llhttp__internal_s",
+    "llhttp__internal_init",
+    "llhttp__internal_execute",
+    "llhttp_alloc",
+    "llhttp_free",
 ];
 
 generate_bindings :: () -> bool {
