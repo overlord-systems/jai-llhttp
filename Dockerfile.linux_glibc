@@ -1,0 +1,26 @@
+# This image clones the latest llhttp repo and builds it
+# according to build instructions on the llhttp readme, which are
+# to run 'npm ci' and then 'make', while ensuring node and clang exist.
+#
+# The resulting build results will be in the 'build' folder, which you can
+# extract using something like 'docker cp my_container:/home/node/llhttp/build linux-glibc-build'
+FROM node:23-bullseye
+
+RUN apt-get update && \
+    apt-get install -y clang lld make && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir /home/node/llhttp
+
+WORKDIR /home/node
+
+RUN git clone https://github.com/nodejs/llhttp
+
+WORKDIR /home/node/llhttp
+
+# Sometimes first make fails...
+RUN npm ci
+RUN make || 1
+RUN make
+
+CMD ["/bin/bash"]
