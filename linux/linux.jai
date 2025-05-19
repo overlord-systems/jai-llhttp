@@ -10,6 +10,31 @@ LLHTTP_VERSION_MAJOR :: 9;
 LLHTTP_VERSION_MINOR :: 3;
 LLHTTP_VERSION_PATCH :: 0;
 
+llhttp__internal_t :: llhttp__internal_s;
+llhttp__internal_s :: struct {
+    _index:                    s32;
+    _span_pos0:                *void;
+    _span_cb0:                 *void;
+    error:                     s32;
+    reason:                    *u8;
+    error_pos:                 *u8;
+    data:                      *void;
+    _current:                  *void;
+    content_length:            u64;
+    type:                      u8;
+    method:                    u8;
+    http_major:                u8;
+    http_minor:                u8;
+    header_state:              u8;
+    lenient_flags:             u16;
+    upgrade:                   u8;
+    finish:                    u8;
+    flags:                     u16;
+    status_code:               u16;
+    initial_message_completed: u8;
+    settings:                  *void;
+}
+
 llhttp_errno :: enum u32 {
     OK                                :: 0;
     INTERNAL                          :: 1;
@@ -151,18 +176,6 @@ llhttp_type :: enum u32 {
 }
 
 llhttp_type_t :: llhttp_type;
-
-llhttp_finish :: enum u32 {
-    SAFE         :: 0;
-    SAFE_WITH_CB :: 1;
-    UNSAFE       :: 2;
-
-    HTTP_FINISH_SAFE         :: SAFE;
-    HTTP_FINISH_SAFE_WITH_CB :: SAFE_WITH_CB;
-    HTTP_FINISH_UNSAFE       :: UNSAFE;
-}
-
-llhttp_finish_t :: llhttp_finish;
 
 llhttp_method :: enum u32 {
     DELETE        :: 0;

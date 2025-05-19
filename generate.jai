@@ -13,12 +13,16 @@ build :: () {
 }
 
 DECLARATIONS_TO_OMIT :: string.[
-    "llhttp__internal_t",
-    "llhttp__internal_s",
     "llhttp__internal_init",
     "llhttp__internal_execute",
     "llhttp_alloc",
     "llhttp_free",
+    "llhttp_finish_t",
+];
+
+ENUMS_TO_OMIT :: string.[
+    // There is an internal enum and public function with this name. We want to remove the enum to avoid conflicts
+    "llhttp_finish",
 ];
 
 generate_bindings :: () -> bool {
@@ -65,10 +69,19 @@ generate_bindings :: () -> bool {
 }
 
 llhttp_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
-    if !parent_decl && array_find(DECLARATIONS_TO_OMIT, decl.name) {
+
+    if parent_decl return .RECURSE;
+
+    if array_find(DECLARATIONS_TO_OMIT, decl.name) {
         decl.decl_flags |= .OMIT_FROM_OUTPUT;
         return .STOP;
     }
+
+    if decl.kind == .ENUM && array_find(ENUMS_TO_OMIT, decl.name) {
+        decl.decl_flags |= .OMIT_FROM_OUTPUT;
+        return .STOP;
+    }
+
     return .RECURSE;
 }
 

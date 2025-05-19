@@ -4,7 +4,7 @@ Jai bindings for the [llhttp](https://github.com/nodejs/llhttp) HTTP parser (`v9
 
 ## Installation
 
-Windows: Download `libllhttp.dll` from releases and place it next to your executable. built with `clang 18.1.8 x86_64 msvc`.
+Windows: Download `libllhttp.so` from releases and place it next to your executable. built with `clang 18.1.8 x86_64 msvc`.
 
 Linux: Download `libllhttp.so` from releases and place it next to your executable. Built on Debian 11 Bullseye (`glibc`). Should work on Debian, Ubuntu, and such. You can build on Alpine (e.g. using Docker) if you want `musl`.
 

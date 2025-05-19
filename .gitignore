@@ -1,4 +1,5 @@
 .build/
 *.pdb
 *.rdi
-
+*.exe
+libllhttp.so
