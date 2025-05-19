@@ -26,3 +26,5 @@ Clone [llhttp](https://github.com/nodejs/llhttp), run `npm ci`, then `make` (whi
 You can use the previous instructions to build on Linux (tested on Debian/Ubuntu). However, you can also cross-compile to linux using Docker.
 
 A Dockerfile (`Dockerfile.linux_glibc`) is provided that will clone llhttp and build it on a Debian machine. This Dockerfile can be run on Windows (and probably MacOS) to cross-compile. More instructions available inside the Dockerfile.
+
+You can slightly modify the Dockerfile (e.g. change to an Alpine image, use `apk get`, etc.) to get musl binaries.
