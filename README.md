@@ -2,7 +2,9 @@
 
 Jai bindings for the [llhttp](https://github.com/nodejs/llhttp) HTTP parser (`v9.3.0`).
 
-## Installation
+## Installation and Usage
+
+For usage, check the example in the `tests` folder.
 
 Windows/Linux: Static library, so simply copy jai-llhttp into your modules folder and import.
 
