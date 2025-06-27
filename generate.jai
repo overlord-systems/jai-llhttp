@@ -38,7 +38,6 @@ generate_bindings :: () -> bool {
             output_filename = "windows/windows.jai";
             array_add(*libpaths, "windows/bin");
 
-            // DLL provided by user not in bin, so use our own footer not generated library declaration
             footer = FOOTER_WIN;
             generate_library_declarations = false;
 
@@ -46,6 +45,10 @@ generate_bindings :: () -> bool {
             strip_flags = 0;
             output_filename = "linux/linux.jai";
             array_add(*libpaths, "linux/bin");
+
+            footer = FOOTER_LINUX;
+            generate_library_declarations = false;
+
         } /*else #if OS == .MACOS {
             strip_flags = 0;
             output_filename = "macos/macos.jai";
@@ -95,7 +98,9 @@ llhttp_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration
 #import "File";
 
 FOOTER_WIN :: #string END
-
 libllhttp :: #library,no_dll "bin/libllhttp";
+END
 
+FOOTER_LINUX :: #string END
+libllhttp :: #library,no_dll "linux/bin/libllhttp";
 END

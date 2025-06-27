@@ -18,8 +18,10 @@ RUN git clone https://github.com/nodejs/llhttp
 
 WORKDIR /home/node/llhttp
 
+# Note: Adjust the version as needed
+RUN git checkout v9.3.0 && npm ci
+
 # Sometimes first make fails...
-RUN npm ci
 RUN make || 1
 RUN make
 
