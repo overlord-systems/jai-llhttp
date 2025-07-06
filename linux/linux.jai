@@ -781,4 +781,4 @@ llhttp_set_lenient_spaces_after_chunk_size :: (parser: *llhttp_t, enabled: s32) 
 
 #scope_file
 
-libllhttp :: #library,no_dll "linux/bin/libllhttp";
+libllhttp :: #library,no_dll "bin/libllhttp";
