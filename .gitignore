@@ -3,3 +3,5 @@
 *.rdi
 *.exe
 libllhttp.so
+.DS_Store
+tests/test

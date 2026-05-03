@@ -49,10 +49,15 @@ generate_bindings :: () -> bool {
             footer = FOOTER_LINUX;
             generate_library_declarations = false;
 
-        } /*else #if OS == .MACOS {
+        } else #if OS == .MACOS {
             strip_flags = 0;
             output_filename = "macos/macos.jai";
-        }*/ else {
+            array_add(*library_search_paths, "macos/bin/arm64");
+
+            footer = FOOTER_MACOS;
+            generate_library_declarations = false;
+
+        } else {
             assert(false, "this OS is currently unsupported. You might be able to add support for it though!");
         }
 
@@ -102,5 +107,9 @@ libllhttp :: #library,no_dll "bin/libllhttp";
 END
 
 FOOTER_LINUX :: #string END
-libllhttp :: #library,no_dll "linux/bin/libllhttp";
+libllhttp :: #library,no_dll "bin/libllhttp";
+END
+
+FOOTER_MACOS :: #string END
+libllhttp :: #library,no_dll "bin/arm64/libllhttp";
 END
